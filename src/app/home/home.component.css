@@ -1,0 +1,16 @@
+.container-fluid {
+    width: 100%;
+    padding-right:15px;
+    padding-left: 15px;
+    margin-right:auto;
+    margin-left: auto;
+    margin-top: 4rem;
+}
+.mt
+ {
+    margin-top: 2.3rem !important;
+ }
+
+ tr.highlight {
+    background-color: lightcoral !important;
+ }

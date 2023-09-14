@@ -1,0 +1,37 @@
+[
+    {
+        "id": 1,
+        "title": "Get User Rest Service",
+        "description": "Implement REST interface for retreiving all users",
+        "dueDate": "2023-09-02",
+        "status": "NEW"
+    },
+    {
+        "id": 2,
+        "title": "Display all users on UI",
+        "description": "Implement front end to display users",
+        "dueDate": "2023-11-03",
+        "status": "IN PROGRESS"
+    },
+    {
+        "id": 3,
+        "title": "Update exisiting users",
+        "description": "Implement front end to allow user to update users",
+        "dueDate": "2023-01-01",
+        "status": "COMPLETED"
+    },
+    {
+        "id": 4,
+        "title": "Delete users",
+        "description": "Implement front end to allow user to delete users",
+        "dueDate": "2023-03-23",
+        "status": "IN PROGRESS"
+    },
+    {
+        "id": 5,
+        "title": "Update User REST Service",
+        "description": "Implement REST service to update users",
+        "dueDate": "2023-02-22",
+        "status": "NEW"
+    }
+]

@@ -1,0 +1,77 @@
+<div class="container-fluid">
+    <!-- <div style="z-index: 0;"> -->
+        <p-table [value]="modifiedTasks" [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]"
+        [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [globalFilterFields]="['status']" responsiveLayout="scroll">
+            <ng-template pTemplate="caption">
+                <div class="flex align-items-center justify-content-between">
+                    Tasks
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th pSortableColumn="title">Title<p-sortIcon filed="name"></p-sortIcon></th>
+                    <th>Description</th>
+                    <th pSortableColumn="dueDate">Due Date<p-sortIcon filed="dueDate"></p-sortIcon></th>
+                    <th> Status <p-columnFilter type="text" field="status" display="menu"></p-columnFilter></th>
+                    <th colspan="2">Action</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-task>
+                <tr class="highlight" [ngClass] = "{highlight : task.hasError}">
+                    <td>
+                        <div *ngIf="task.state == 'ADDED'|| task.state == 'MODIFIED' else titleAsLabel">
+                            <input pInputText placeHolder="Enter title" required [(ngModel)]="task.title"
+                                id="title" name="title" #title="ngModel">
+                        </div>
+                        <ng-template #titleAsLabel>
+                            <div>{{task.title}}</div>
+                        </ng-template>
+                    </td>
+                    <td>
+                        <div *ngIf="task.state == 'ADDED'|| task.state == 'MODIFIED' else descriptionAsLabel">
+                            <!-- <textarea pInputText placeHolder="Enter description" required [(ngModel)]="task.description"
+                                id="description" name="description" #description="ngModel"> -->
+                                <textarea rows="1" cols="50" pInputTextarea [(ngModel)]="task.description"></textarea>
+
+                        </div>
+                        <ng-template #descriptionAsLabel>
+                            <div>{{task.description}}</div>
+                        </ng-template>
+                    </td>
+                    <td>
+                        <div *ngIf="task.state == 'ADDED'|| task.state == 'MODIFIED' else dueDateAsLabel">
+                            <p-calendar [(ngModel)]="task.dueDate" id="dueDate" name="dueDate"></p-calendar>
+                        </div>
+                        <ng-template #dueDateAsLabel>
+                            <div>{{task.dueDate | date: 'dd/MM/yyyy'}}</div>
+                        </ng-template>
+                    </td>
+                    <td>
+                        <div style="z-index: 10" *ngIf="task.state == 'ADDED'|| task.state == 'MODIFIED' else statusAsLabel">
+                            <p-dropdown placeHolder="Select status" [options]="statusOptions" [(ngModel)]="task.statusUIObj"
+                                id="status" name="status" optionLabel="name" (onChange)="onStatusChange($event,task)"></p-dropdown>
+                        </div>
+                        <ng-template #statusAsLabel>
+                            <div>{{task.status}}</div>
+                        </ng-template>
+                    </td>
+
+                        <div><button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-succss mt"
+                              [disabled]="task.status == 'COMPLETED'"  (click)="onClickOfEdit( task )"></button></div>
+                    <td>
+                        <div><button pButton pRipple icon="pi pi-trash" style="margin-top: 1.3rem !important;" class="p-button-rounded p-button-warning mt"
+                            (click)="onClickOfDelete( task )"></button></div>
+                    <td>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+        <p-messages [(value)]="msgs"></p-messages> 
+
+    <div>
+        <button pButton label="Cancel" (click)="onClickOfCancel()" style="margin-top:5px; margin-right:2px;float: right;"></button>
+        <button pButton label="Save" (click)="onClickOfSave()" style="margin-top:5px; margin-right:2px;float: right;"></button>
+        <button pButton label="Add" (click)="onClickOfAdd()" style="margin-top:5px; margin-right:2px;float: right;"></button>
+    </div>
+</div>
